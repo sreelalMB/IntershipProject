@@ -1,0 +1,115 @@
+/* General layout */
+.dashboard {
+    display: flex;
+    height: 100vh;
+    background-color: #f4f6f8;
+}
+
+
+
+
+
+.sidebar {
+    width: 250px;
+    background-color: #2f3542;
+    color: white;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.sidebar h2 {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 15px 0;
+    padding: 10px;
+    background-color: #57606f;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.sidebar ul li:hover {
+    background-color: #1e272e;
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: white;
+    box-sizing: border-box;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.cards {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card {
+    background-color: #f1f2f6;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    width: 30%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.appointments-table {
+    margin-top: 40px;
+}
+
+.appointments-table h2 {
+    margin-bottom: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #f1f2f6;
+}
+
+table tr:hover {
+    background-color: #f4f6f8;
+}
+.logout-link {
+    text-decoration: none;
+    color: inherit; /* Inherit color from parent element */
+}
+
+/* Add hover effect similar to other sidebar items */
+.logout-link:hover {
+    color: white;
+    background-color: #ff4757; /* or any other hover color */
+    padding: 10px;
+    border-radius: 4px;
+    display: block; /* Ensure it behaves like a block-level element */
+}

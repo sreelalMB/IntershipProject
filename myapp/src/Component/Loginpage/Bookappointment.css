@@ -1,0 +1,72 @@
+.book-appointment {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 100px;
+    background-color: rgb(148, 242, 245);
+    border-radius: 80px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    
+   
+  }
+  
+  .book-appointment h2 {
+    text-align: center;
+    color: #333;
+  }
+  
+  .book-appointment form {
+    
+    
+    display: flex;
+    flex-direction: column;
+    background-color: #bd3a3a;
+  }
+  
+  .book-appointment label {
+    margin: 10px 0;
+    font-weight: bold;
+  }
+  
+  .book-appointment select,
+  .book-appointment input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .book-appointment button {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .book-appointment button:hover {
+    background-color: #0056b3;
+  }
+  
+  .message {
+    margin-top: 15px;
+    text-align: center;
+    font-weight: bold;
+    color: green;
+  }
+ 
+  
+  .bookapp{
+    background-image: url(../../assests/img11.jpg);
+    background-size: auto;
+  display: grid;
+  justify-content: center;
+  align-items: normal;    
+  height: 100vh; 
+   
+  }
+  
+  

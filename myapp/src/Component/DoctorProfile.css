@@ -1,0 +1,70 @@
+.doctor-profile {
+    padding: 20px;
+    max-width: 350px;
+    margin: 0 auto;
+    margin-top: 80px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.doctor-profile h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.image-upload {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.image-upload input {
+    padding: 5px;
+}
+
+.image-upload img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ddd;
+}
+
+.save-button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.save-button:hover {
+    background-color: #0056b3;
+}

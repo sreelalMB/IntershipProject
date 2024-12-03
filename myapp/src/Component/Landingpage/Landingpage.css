@@ -1,0 +1,44 @@
+.content-section {
+  padding: 50px 20px;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+.section-description {
+  font-size: 1.2rem;
+  color: #7f8c8d;
+  margin-bottom: 40px;
+}
+
+.features {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.feature-card {
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 20px;
+  max-width: 300px;
+}
+
+.feature-card h3 {
+  font-size: 1.5rem;
+  color: #34495e;
+  margin-bottom: 10px;
+}
+
+.feature-card p {
+  font-size: 1rem;
+  color: #7f8c8d;
+}

@@ -1,0 +1,111 @@
+Container for the admin login page
+
+
+.background-image {
+    max-width: 100%; 
+    height: auto;   
+    border-radius: 10px; 
+  }
+
+
+
+
+
+
+.admin-login-container {
+    background-image:url(../assests/img02.jpeg);
+    background-size:cover;
+    background-position: middle;
+    background-repeat: no-repeat;
+    .background-image {
+        max-width: 100%; 
+        height: auto;   
+        border-radius: 10px; 
+      }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+    background-color: #2e61ae; 
+  }
+  
+  /* Login form styling */
+  .loginn-form {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+  }
+  
+  /* Form title */
+  .loginn-form h2 {
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    color: #007bff;
+  }
+  
+  /* Form group styling */
+  .form-groupp {
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  
+  .form-groupp label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .form-groupp input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    outline: none;
+  }
+  
+  /* Focus effect on input fields */
+  .form-groupp input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
+  /* Login button styling */
+  .login-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .login-btn:hover {
+    background-color: #0056b3;
+  }
+
+  .logout-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #d61010;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .logout-btn:hover {
+    background-color: #914a4a;
+  }
+  
+
+  

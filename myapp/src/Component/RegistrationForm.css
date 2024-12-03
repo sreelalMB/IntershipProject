@@ -1,0 +1,101 @@
+/* Ensure the body takes full height of the viewport */
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
+/* Use flexbox to center the form */
+.form-container {
+  background-image: url(../assests/img04.jpg);
+  background-size: cover;
+  display: flex;
+  justify-content: center;  /* Centers the form horizontally */
+  align-items: center;      /* Centers the form vertically */
+  height: 100vh;            /* Takes the full height of the viewport */
+}
+
+form {
+  width: 300px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;  /* Ensure padding doesn't affect width */
+}
+
+h2 {
+  text-align: center;
+}
+
+.form-groupp {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[type="name"] {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.signup-btn {
+  background-color: #18ef6b;
+  color: white;
+}
+
+.signup-btn:hover {
+  background-color: #23cb69;
+}
+
+.signout-btn {
+  background-color: #ef2222;
+  color: white;
+}
+
+.sigout-btn:hover {
+  background-color: #e11010;
+}
+
+.register-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.register-btn:hover {
+  background-color: #673fdf;
+}
+.form-footer {
+  margin-top: 15px;
+  text-align: center; /* Center the footer text */
+}
+
+.login-link {
+  color: #007bff; /* Blue color for the link */
+  text-decoration: none; /* Remove underline */
+}
+
+.login-link:hover {
+  text-decoration: underline; /* Underline on hover */
+}
+

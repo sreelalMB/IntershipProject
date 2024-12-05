@@ -11,8 +11,9 @@ function Appointments() {
             axios
                 .get(`http://localhost:4000/appointment/${doctorId}`)
                 .then((res) => {
-                    if (res.status == 201) {
+                    if (res.status === 201) {
                         setAppointments(res.data);
+                        console.log("API Response:", res.data);
                     } else {
                         console.log("No appointments found.");
                         setAppointments([]);

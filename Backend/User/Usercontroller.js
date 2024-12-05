@@ -164,6 +164,7 @@ const bookapp = async (req, res) => {
       date,
       time,
     });
+    console.log(appointment)
 
     await appointment.save();
     res.status(201).json({ message: "Appointment booked successfully!" });
@@ -179,6 +180,7 @@ const getAppointments = async (req, res) => {
   console.log(findDoc)
   if (findDoc) {
     res.status(201).json(findDoc)
+    console.log(findDoc)
   } else {
     res.status(404).json({ msg: "Finding doctor failed" })
   }

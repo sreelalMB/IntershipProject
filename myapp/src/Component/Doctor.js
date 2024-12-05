@@ -9,16 +9,16 @@ const Doctor = () => {
     const { name } = location.state || {};
     const [profile, setProfile] = useState(null);
 
-    const userId = localStorage.getItem("user_id");
-    const doctorId=localStorage.getItem("DoctorId")
+    // const userId = localStorage.getItem("user_id");
+    const doctorId=localStorage.getItem("doctor_id")
 
     useEffect(() => {
-        if (userId) {
-            axios.get(`http://localhost:4000/userprofile/${userId}`)
+        if (doctorId) {
+            axios.get(`http://localhost:4000/userprofile/${doctorId}`)
                 .then((res) => setProfile(res.data.user))
                 .catch((err) => console.error("Error fetching profile:", err));
         }
-    }, [userId]);
+    }, [doctorId]);
 
     if (!profile) {
         return <div>Loading...</div>; // Added a loading state

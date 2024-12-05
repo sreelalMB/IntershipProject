@@ -8,7 +8,7 @@ const DoctorProfile = () => {
   const navigate = useNavigate();
   const [profile, setProfile] = useState(location.state || { name: '', email: '', specialization: '', image: '', id: '' });
   const [previewImage, setPreviewImage] = useState(profile.image || '');
-  const userId = localStorage.getItem("user_id");
+  const userId = localStorage.getItem("doctor_id");
 
   useEffect(() => {
     if (userId) {

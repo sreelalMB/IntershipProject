@@ -19,17 +19,9 @@ import Doctor from './Component/Doctor';
 import DoctorProfile from './Component/DoctorProfile';
 import Appointments from './Component/Appointments';
 import AboutUs from './Component/AboutUs';
-
-
-
-
-
-
-
-
-
-
-
+import AdminDoctorView from './Component/AdminPages/AdminDoctorView';
+import AdminUserView from './Component/AdminPages/AdminUserView';
+import AdminAppointmentViews from './Component/AdminPages/AdminAppointmentViews';
 
 
 function App() {
@@ -52,10 +44,9 @@ function App() {
           <Route path='/appointment' element={<Appointments />} />
           <Route path='/DoctorProfile' element={<DoctorProfile />} />
           <Route path='/Aboutus' element={<AboutUs />} />
-
-
-
-
+          <Route path='/AdminDoctorView' element={<AdminDoctorView/>}/>
+          <Route path='/AdminUserView' element={<AdminUserView/>}/>
+          <Route path='/AdminappointmentView' element={<AdminAppointmentViews/>}/>
 
         </Routes>
       </div>

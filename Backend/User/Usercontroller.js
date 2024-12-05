@@ -186,7 +186,56 @@ const getAppointments = async (req, res) => {
   }
 };
 
+const appointmentView = async (req, res) => {
+  const viewAppointment = await appSchema.find().populate('patient', 'name email').populate('doctor', 'name specialization')
+  console.log(viewAppointment)
+  if (viewAppointment) {
+    res.status(201).json(viewAppointment)
+  }
+}
 
+const viewUser = (async (req, res) => {
+  const viewUser = await UserSchema.find();
+  if (viewUser) {
+    res.status(200).json(viewUser)
+  }
+})
+
+const deleteUser = (async (req, res) => {
+  const { id } = req.params
+  const deleteUser = await UserSchema.findByIdAndDelete(id);
+  if (deleteUser) {
+    res.status(200)
+  }
+
+})
+
+const docView = async (req, res) => {
+  const docView = await DoctorSchema.find()
+  if (docView) {
+    res.status(200).json(docView)
+  }
+}
+
+
+const patientCount = (async (req, res) => {
+  const patient = await UserSchema.countDocuments()
+  if (patient) {
+    res.json(patient)
+  }
+})
+const doctorCount = (async (req, res) => {
+  const doctor = await DoctorSchema.countDocuments()
+  if (doctor) {
+    res.json(doctor)
+  }
+})
+const appointmentCount = (async (req, res) => {
+  const appointment = await appSchema.countDocuments  ()
+  if (appointment) {
+    res.json(appointment)
+  }
+})
 
 
 
@@ -198,5 +247,5 @@ module.exports = {
   doclogin,
   doclist,
   updateDoctorProfile,
-  findDoc, bookapp, getAppointments
+  findDoc, bookapp, getAppointments, viewUser, deleteUser, docView, appointmentView,appointmentCount ,doctorCount ,patientCount
 };

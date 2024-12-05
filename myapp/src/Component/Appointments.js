@@ -46,9 +46,14 @@ function Appointments() {
                             <p className="card-text">
                                 <strong>Time:</strong> {appointment.time}
                             </p>
-                            <a href="#" className="btn btn-primary">
-                                Details
-                            </a>
+                            <div className="">
+                                <a href="#" className="btn btn-success">
+                                    Approve
+                                </a> 
+                                <a href="#" className="btn btn-danger ml-12">
+                                    Delete
+                                </a>
+                            </div>
                         </div>
                     </div>
                 ))

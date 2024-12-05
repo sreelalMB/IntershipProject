@@ -38,7 +38,7 @@ const Doctor = () => {
                     <li><Link to="/home" className="sidebar-link">🏠 Home</Link></li>
                     <li><Link to="/DoctorProfile" className="sidebar-link">👤 Profile</Link></li>
                     <li><Link to="/users" className="sidebar-link">👥 Users</Link></li>
-                    <li><Link to={`/appointment/${doctorId}`} className="sidebar-link">📅 Appointments</Link></li>
+                    <li><Link to="/appointment" className="sidebar-link">📅 Appointments</Link></li>
                     <li>
                         <Link to="/" className="logout-link">🚪 Log Out</Link>
                     </li>

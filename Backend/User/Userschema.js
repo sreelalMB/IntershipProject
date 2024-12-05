@@ -3,6 +3,6 @@ const users = new mongoose.Schema({
 name:{type:String},
 email:{type:String},
 password:{type:String},
-phoneNumber:{type:Number}
+phone:{type:Number}
 })
 module.exports=new mongoose.model("user",users)

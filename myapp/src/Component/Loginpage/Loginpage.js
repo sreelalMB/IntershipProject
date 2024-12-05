@@ -8,26 +8,27 @@ import axios from 'axios';
 const Loginpage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-const navigate=useNavigate();
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:4000/login",{
-      email,password})
-    .then((result)=>{
-      if(result.status==200){
-        
-      alert("Login successfully");
-        navigate("/navbar")
-      }
-      else{
+    axios.post("http://localhost:4000/login", {
+      email, password
+    })
+      .then((result) => {
+        if (result.status == 200) {
+          localStorage.setItem("userid" , result.data.userId)
+          alert("Login successfully");
+          navigate("/navbar")
+        }
+        else {
+          alert("something went wrong")
+        }
+      })
+      .catch((err) => {
         alert("something went wrong")
-      }
-    })
-    .catch((err)=>{
-      alert("something went wrong")
-    })
-  
-   
+      })
+
+
     // You can add your login logic here (API call, etc.)
     console.log("Email:", email);
     console.log("Password:", password);

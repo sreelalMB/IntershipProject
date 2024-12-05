@@ -49,7 +49,7 @@ function App() {
           <Route path='/Navbar' element={<Navbar />} />
           <Route path='/Bookappointment' element={<Bookappointment />} />
           <Route path='/Doctor' element={<Doctor />} />
-          <Route path='/appointment/:doctorId' element={<Appointments />} />
+          <Route path='/appointment' element={<Appointments />} />
           <Route path='/DoctorProfile' element={<DoctorProfile />} />
           <Route path='/Aboutus' element={<AboutUs />} />
 

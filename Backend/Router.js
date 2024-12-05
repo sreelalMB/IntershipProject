@@ -19,7 +19,7 @@ router.post("/doctorreg", controller.docReg);
 router.post("/doclogin", controller.doclogin);
 router.get("/doclist", controller.doclist);
 router.get("/userprofile/:userId", controller.findDoc);
-router.post("/bookapp/:userId", controller.bookapp);
+router.post("/bookapp", controller.bookapp);
 
 router.put("/update/:id", upload.single("profileImage"), controller.updateDoctorProfile);
 router.get('/appointment/:doctorId', controller.getAppointments);

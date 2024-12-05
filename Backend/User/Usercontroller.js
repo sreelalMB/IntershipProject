@@ -155,71 +155,32 @@ const findDoc = async (req, res) => {
 };
 
 
-
 const bookapp = async (req, res) => {
-  const { selectedDoctor, appointmentDate, appointmentTime } = req.body;
-  const userId=req.params.userId;
-
+  const { userId, doctorId, date, time } = req.body;
   try {
-    // Validate the input
-    if (!selectedDoctor || !appointmentDate || !appointmentTime || !userId) {
-      return res.status(400).json({ message: "All fields are required" });
-    }
-
-    // Create a new appointment document
     const appointment = new appSchema({
-      patient:userId,
-      doctor: selectedDoctor,
-      date: new Date(appointmentDate), // Ensure the date format is correct
-      time: appointmentTime,
+      patient: userId,
+      doctor: doctorId,
+      date,
+      time,
     });
 
-    // Save the appointment to the database
-    const savedAppointment = await appointment.save();
-
-    if (savedAppointment) {
-      res.status(201).json({ 
-        message: "Appointment booked successfully", 
-        appointment: savedAppointment,
-        Doctor: savedAppointment.doctor 
-      });
-    } else {
-      res.status(400).json({ message: "Failed to book appointment" });
-    }
-  } catch (err) {
-    console.error("Error booking appointment:", err);
-    res.status(500).json({ 
-      message: "Server error during appointment booking", 
-      error: err.message 
-    });
+    await appointment.save();
+    res.status(201).json({ message: "Appointment booked successfully!" });
+  } catch (error) {
+    console.error("Error booking appointment:", error);
+    res.status(500).json({ message: "Failed to book appointment." });
   }
 };
 
 const getAppointments = async (req, res) => {
-  const doctorId = req.params.doctorId; // Extract doctorId from request parameters
-
-  try {
-    console.log('Doctor ID received:', doctorId);
-
-    if (!doctorId) {
-      console.error('Doctor ID is missing');
-      return res.status(400).json({ message: "Doctor ID is required" });
-    }
-
-    const appointments = await appSchema.find({ doctor: doctorId })
-      .populate('doctor', 'name specialization') // Populate the doctor's name and specialization
-      .populate('patient','name email'); // Populate the patient's name and email
-
-    if (appointments.length > 0) {
-      console.log('Appointments found:', appointments);
-      res.status(200).json({ message: "Appointments retrieved successfully", appointments });
-    } else {
-      console.log('No appointments found for doctor ID:', doctorId);
-      res.status(404).json({ message: "No appointments found" });
-    }
-  } catch (err) {
-    console.error('Error in fetching appointments:', err);
-    res.status(500).json({ message: "Server error during fetching appointments", error: err.message });
+  const { doctorId } = req.params// Extract doctorId from request parameter
+  const findDoc = await appSchema.find({ doctor: doctorId }).populate('patient', 'name email phone')
+  console.log(findDoc)
+  if (findDoc) {
+    res.status(201).json(findDoc)
+  } else {
+    res.status(404).json({ msg: "Finding doctor failed" })
   }
 };
 
@@ -235,5 +196,5 @@ module.exports = {
   doclogin,
   doclist,
   updateDoctorProfile,
-  findDoc, bookapp ,getAppointments
+  findDoc, bookapp, getAppointments
 };

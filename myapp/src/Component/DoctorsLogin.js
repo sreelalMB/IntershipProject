@@ -20,7 +20,8 @@ const DoctorsLogin = () => {
       const { msg, userId } = res.data;
       if (msg === "exist") {
         alert("Login Successful");
-        localStorage.setItem('user_id', userId);
+        console.log(userId)
+        localStorage.setItem('doctor_id', userId);
         navigate('/Doctor');
       } else {
         alert("Login Failed");

@@ -13,6 +13,7 @@ const BookAppointment = () => {
   const userId = localStorage.getItem("userid");
 
   useEffect(() => {
+    // console.log("userid is: " , userId)
     axios.get("http://localhost:4000/doclist")
       .then((res) => {
         setDoctors(res.data);
@@ -23,61 +24,51 @@ const BookAppointment = () => {
       });
   }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  const bookHandler = () => {
     if (!selectedDoctor || !appointmentDate || !appointmentTime) {
-      alert("Please fill in all fields");
+      setMessage("Please fill all the fields to book an appointment.");
       return;
     }
 
-    const currentDate = new Date();
-    const selectedDate = new Date(appointmentDate);
-    if (selectedDate < currentDate) {
-      alert("Please select a valid future date");
-      return;
-    }
-
-    if (!userId) {
-      alert("User ID not found. Please log in again.");
-      return;
-    }
-
+    console.log("Selected Doctor ID:", selectedDoctor); // Logs the selected doctor's ID
     setIsSubmitting(true);
-    try {
-      const res = await axios.post(`http://localhost:4000/bookapp/${userId}`, {
-        selectedDoctor,
-        appointmentDate,
-        appointmentTime,
-      });
 
-      if (res.status === 201) {
-        const { message, Doctor } = res.data;
-        localStorage.setItem("DoctorId", Doctor);
-        setMessage(message || "Appointment Booked Successfully");
-        alert("Appointment Booked Successfully");
-      } else {
-        setMessage("Booking Failed");
-        alert("Booking Failed");
-      }
-    } catch (error) {
-      console.error("Error booking appointment:", error);
-      setMessage("An error occurred while booking the appointment.");
-    } finally {
-      setIsSubmitting(false);
-    }
+    const appointmentData = {
+      userId,
+      doctorId: selectedDoctor,
+      date: appointmentDate,
+      time: appointmentTime,
+    };
+
+    axios.post("http://localhost:4000/bookapp", appointmentData)
+      .then((res) => {
+        console.log(res.data)
+        if (res.status == 201) {
+          setMessage("Appointment booked successfully!");
+          setSelectedDoctor('');
+          setAppointmentDate('');
+          setAppointmentTime('');
+        }
+      })
+      .catch((error) => {
+        console.error("Error booking appointment:", error);
+        setMessage("Failed to book appointment. Please try again.");
+      })
+      .finally(() => {
+        setIsSubmitting(false);
+      });
   };
 
   return (
     <div className="bookapp">
       <div className="book-appointment">
         <h2>Book an Appointment</h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={(e) => e.preventDefault()}>
           <label>
             Select Doctor:
             <select
               value={selectedDoctor}
-              onChange={(e) => setSelectedDoctor(e.target.value)}
+              onChange={(e) => setSelectedDoctor(e.target.value)} // Update the selectedDoctor state
             >
               <option value="">--Select Doctor--</option>
               {doctors.map((doctor) => (
@@ -106,7 +97,11 @@ const BookAppointment = () => {
             />
           </label>
 
-          <button type="submit" disabled={isSubmitting}>
+          <button
+            type="button"
+            disabled={isSubmitting}
+            onClick={bookHandler}
+          >
             {isSubmitting ? "Booking..." : "Book Appointment"}
           </button>
         </form>

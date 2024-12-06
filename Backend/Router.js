@@ -31,6 +31,6 @@ router.get('/appointmentview', controller.appointmentView)
 router.get('/doctorcount' , controller.doctorCount)
 router.get('/patientcount' , controller.patientCount)
 router.get('/appointmentcount' , controller.appointmentCount)
-
+router.put("/appointment/:id/status", controller.updateAppointmentStatus);
 
 module.exports = router;

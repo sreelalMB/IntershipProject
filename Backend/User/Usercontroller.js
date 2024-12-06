@@ -156,13 +156,14 @@ const findDoc = async (req, res) => {
 
 
 const bookapp = async (req, res) => {
-  const { userId, doctorId, date, time } = req.body;
+  const { userId, doctorId, date, time, status } = req.body;
   try {
     const appointment = new appSchema({
       patient: userId,
       doctor: doctorId,
       date,
       time,
+      status: status || "pending",
     });
     console.log(appointment)
 
@@ -175,8 +176,13 @@ const bookapp = async (req, res) => {
 };
 
 const getAppointments = async (req, res) => {
-  const { doctorId } = req.params// Extract doctorId from request parameter
-  const findDoc = await appSchema.find({ doctor: doctorId }).populate('patient', 'name email phone')
+  const { doctorId } = req.params
+  const { status } = req.query;// Extract doctorId from request parameter
+
+  const query = { doctor: doctorId };
+  if (status) query.status = status;
+
+  const findDoc = await appSchema.find(query).populate('patient', 'name email phone')
   console.log(findDoc)
   if (findDoc) {
     res.status(201).json(findDoc)
@@ -185,6 +191,34 @@ const getAppointments = async (req, res) => {
     res.status(404).json({ msg: "Finding doctor failed" })
   }
 };
+
+
+const updateAppointmentStatus = async (req, res) => {
+  const { id } = req.params;
+  const { status } = req.body;
+  console.log(id)
+  console.log(status)
+
+  try {
+    const updatedAppointment = await appSchema.findByIdAndUpdate(
+      id,
+      { status },
+      { new: true } // Return the updated document
+    );
+    console.log(updatedAppointment)
+    if (updatedAppointment) {
+      res.status(200).json(updatedAppointment);
+    } else {
+      res.status(404).json({ msg: "Appointment not found" });
+    }
+  } catch (error) {
+    console.error("Error updating appointment:", error);
+    res.status(500).json({ msg: "Internal server error" });
+  }
+};
+
+
+
 
 const appointmentView = async (req, res) => {
   const viewAppointment = await appSchema.find().populate('patient', 'name email').populate('doctor', 'name specialization')
@@ -231,7 +265,7 @@ const doctorCount = (async (req, res) => {
   }
 })
 const appointmentCount = (async (req, res) => {
-  const appointment = await appSchema.countDocuments  ()
+  const appointment = await appSchema.countDocuments()
   if (appointment) {
     res.json(appointment)
   }
@@ -247,5 +281,6 @@ module.exports = {
   doclogin,
   doclist,
   updateDoctorProfile,
-  findDoc, bookapp, getAppointments, viewUser, deleteUser, docView, appointmentView,appointmentCount ,doctorCount ,patientCount
+  findDoc, bookapp, getAppointments, viewUser, deleteUser, docView, appointmentView, appointmentCount, doctorCount, patientCount,
+  updateAppointmentStatus
 };

@@ -9,7 +9,7 @@ function Appointments() {
         if (doctorId) {
             console.log("Fetching appointments for Doctor ID:", doctorId);
             axios
-                .get(`http://localhost:4000/appointment/${doctorId}`)
+                .get(`http://localhost:4000/appointment/${doctorId}?status=pending`)
                 .then((res) => {
                     if (res.status === 201) {
                         setAppointments(res.data);
@@ -27,12 +27,30 @@ function Appointments() {
         }
     }, [doctorId]);
 
+    const approveHandler = (id) => {
+        console.log(id)
+        axios
+            .put(`http://localhost:4000/appointment/${id}/status`, {
+                status: "approved",
+            })
+            .then((res) => {
+                if (res.status === 200) {
+                    alert("Approved")
+                }
+            })
+            .catch((error) => {
+                console.error("Error approving appointment:", error);
+            });
+
+    }
+
+
     return (
         <div style={{ marginTop: "90px", display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
             <h3>Appointments</h3>
             {appointments ? (
-                appointments.map((appointment, index) => (
-                    <div key={index} className="card w-75 mb-3">
+                appointments.map((appointment) => (
+                    <div key={appointment._id} className="card w-75 mb-3">
                         <div className="card-body">
                             <h5 className="card-title">New Appointment</h5>
                             <p className="card-text">
@@ -47,9 +65,9 @@ function Appointments() {
                                 <strong>Time:</strong> {appointment.time}
                             </p>
                             <div className="">
-                                <a href="#" className="btn btn-success">
+                                <a href="#" className="btn btn-success" onClick={() => { approveHandler(appointment._id) }}>
                                     Approve
-                                </a> 
+                                </a>
                                 <a href="#" className="btn btn-danger ml-12">
                                     Delete
                                 </a>

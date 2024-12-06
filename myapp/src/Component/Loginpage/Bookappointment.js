@@ -38,6 +38,7 @@ const BookAppointment = () => {
       doctorId: selectedDoctor,
       date: appointmentDate,
       time: appointmentTime,
+      status:"pending"
     };
 
     axios.post("http://localhost:4000/bookapp", appointmentData)

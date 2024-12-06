@@ -17,7 +17,12 @@ const appSchema = new mongoose.Schema({
     time: {
         type: String,
         required: true
-    }
+    },
+    status: {
+        type: String,
+        enum: ["pending", "approved", "rejected"], // Define possible statuses
+        default: "pending",
+    },
 });
 
 module.exports = mongoose.model("Appointment", appSchema);

@@ -45,7 +45,6 @@ function App() {
           <Route path='/AdminDoctorView' element={<AdminDoctorView/>}/>
           <Route path='/AdminUserView' element={<AdminUserView/>}/>
           <Route path='/AdminappointmentView' element={<AdminAppointmentViews/>}/>
-
         </Routes>
       </div>
     </BrowserRouter>

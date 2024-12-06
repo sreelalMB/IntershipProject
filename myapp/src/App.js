@@ -6,7 +6,6 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js"
 import Landingpage from './Component/Landingpage/Landingpage';
 // import AdminLoginPage from './Component/Admin';
 import Admin from './Component/Admin';
-
 import RegistrationForm from './Component/RegistrationForm';
 import AdminDashboard from './Component/AdminDashboard/AdminDashboard';
 import Loginpage from './Component/Loginpage/Loginpage';
@@ -29,7 +28,6 @@ function App() {
     <BrowserRouter>
       <div>
         <Routes>
-
           <Route path='/' element={<Landingpage />} />
           <Route path='/Admin' element={<Admin />} />
           <Route path='/DoctorsForm' element={<DoctorsForm />} />

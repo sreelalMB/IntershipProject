@@ -192,6 +192,25 @@ const getAppointments = async (req, res) => {
   }
 };
 
+const userAppointmentView = async (req, res) => {
+  const { id } = req.params
+  const { status } = req.query;
+
+  const query = { patient: id };
+  if (status) query.status = status;
+
+  console.log("query:", query)
+
+  const findUser = await appSchema.find(query).populate('doctor', 'name specialization')
+  console.log("Finding User :" ,findUser)
+  if (findUser) {
+    res.status(201).json(findUser)
+    console.log("Finding User :" ,findUser)
+  } else {
+    res.status(404).json({ msg: "Finding User failed" })
+  }
+};
+
 
 const updateAppointmentStatus = async (req, res) => {
   const { id } = req.params;
@@ -273,6 +292,53 @@ const appointmentCount = (async (req, res) => {
 
 
 
+const patientView = async (req, res) => {
+  const { id } = req.params;
+  const findPatient = await UserSchema.findById(id);
+  console.log("findPatient:" + findPatient)
+  if (findPatient) {
+    res.status(200).json(findPatient)
+  } else {
+    res.status(404).json({ msg: "Failed to fetch patiend data" })
+
+
+  }
+}
+
+const updateProfile = async (req, res) => {
+  const { name, email, phone } = req.body;
+  const { id } = req.params
+  const updateFields = { name, email, phone }
+  const findUser = await UserSchema.findByIdAndUpdate(id, updateFields, { new: true })
+  if (findUser) {
+    res.status(200).json(findUser)
+  } else {
+    res.status(404).json({ msg: "Failed to update" })
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 module.exports = {
   addusers,
@@ -282,5 +348,5 @@ module.exports = {
   doclist,
   updateDoctorProfile,
   findDoc, bookapp, getAppointments, viewUser, deleteUser, docView, appointmentView, appointmentCount, doctorCount, patientCount,
-  updateAppointmentStatus
+  updateAppointmentStatus, patientView , updateProfile ,userAppointmentView
 };

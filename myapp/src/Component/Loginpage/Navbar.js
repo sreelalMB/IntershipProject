@@ -32,8 +32,8 @@ const Navbar = () => {
     <div>
       <nav className="navbar">
         <div className="navbar-logo">
-          <h2>BookMyCare</h2>
-        </div>
+        <p className="text-3xl font-bold text-white" href="#">BookMyCare</p>
+          </div>
         <ul className="navbar-links">
           <li><Link to="/Navbar">Home</Link></li>
           <li><Link to="/AboutUs">About Us</Link></li>

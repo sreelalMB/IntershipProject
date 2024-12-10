@@ -32,5 +32,10 @@ router.get('/doctorcount' , controller.doctorCount)
 router.get('/patientcount' , controller.patientCount)
 router.get('/appointmentcount' , controller.appointmentCount)
 router.put("/appointment/:id/status", controller.updateAppointmentStatus);
+router.post('/patientview/:id' , controller.patientView)
+router.put('/profileupdate/:id' , controller.updateProfile)
+router.post('/userAppointmentView/:id' , controller.userAppointmentView)
+
+
 
 module.exports = router;

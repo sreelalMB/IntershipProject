@@ -6,7 +6,7 @@ import "./Patients.css";
 const PatientProfile = () => {
   const [editMode, setEditMode] = useState(false);
   const [patient, setPatient] = useState({});
-  const [appointments, setAppointments] = useState([]);
+  const [appointments, setAppointments] = useState({});
   const [data, setData] = useState({
     name: "",
     gender: "",
@@ -22,16 +22,38 @@ const PatientProfile = () => {
   useEffect(() => {
     const fetchPatientData = async () => {
       try {
-        const response = await axios.post(`/api/patient/view/${id}`);
-        setPatient(response.data.patient);
-        setAppointments(response.data.appointments || []);
-        setData(response.data.patient);
+        const res = await axios.post(`http://localhost:4000/patientview/${id}`);
+        if (res.status === 200) {
+          console.log("Data Fetched Successfully");
+          setPatient(res.data);
+          setData(res.data); // Initialize data for editing
+        }
       } catch (error) {
         console.error("Error fetching patient data:", error);
       }
     };
 
     fetchPatientData();
+  }, [id]);
+
+  useEffect(() => {
+    const fetchAppointments = async () => {
+      try {
+        const res = await axios.post(`http://localhost:4000/userAppointmentView/${id}?status=approved`);
+        if (res.status === 201) {
+          console.log(res.data)
+          setAppointments(res.data);
+          console.log("API Response:", res.data);
+        } else {
+          console.log("No appointments found.");
+          setAppointments([]);
+        }
+      } catch (error) {
+        console.error("Error fetching appointments:", error);
+      }
+    };
+
+    fetchAppointments();
   }, [id]);
 
   const handleChange = (e) => {
@@ -57,9 +79,9 @@ const PatientProfile = () => {
   const handleSave = async () => {
     if (validate()) {
       try {
-        const response = await axios.post(`/api/patient/edit/${id}`, data);
+        const response = await axios.put(`http://localhost:4000/profileupdate/${id}`, data);
         console.log("Profile updated successfully", response);
-        setPatient(data);
+        setPatient(data); // Update patient data after successful save
         setEditMode(false);
       } catch (error) {
         console.error("Error updating profile:", error);
@@ -73,7 +95,7 @@ const PatientProfile = () => {
 
   return (
     <div className="patient-profile">
-      <div className="profile-header">
+      <div className="header">
         <button className="back-button" onClick={handleBack}>
           <i className="fas fa-arrow-left"></i> Back
         </button>
@@ -83,7 +105,7 @@ const PatientProfile = () => {
       <div className="profile-details">
         <div className="profile-image">
           <img
-            src={patient.imageUrl || "default-profile.png"}
+            src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
             alt="Profile"
             width="200px"
             height="200px"
@@ -137,7 +159,7 @@ const PatientProfile = () => {
               />
               {errors.phone && <div className="text-danger">{errors.phone}</div>}
             </div>
-            
+
             <div className="edit-buttons">
               <button onClick={handleSave}>Save</button>
               <button onClick={() => setEditMode(false)}>Cancel</button>
@@ -146,10 +168,9 @@ const PatientProfile = () => {
         ) : (
           <>
             <p><strong>Name:</strong> {patient.name}</p>
-            <p><strong>Gender:</strong> {patient.gender}</p>
             <p><strong>Email:</strong> {patient.email}</p>
             <p><strong>Phone:</strong> {patient.phone}</p>
-            
+
             <button className="edit-button" onClick={() => setEditMode(true)}>
               Edit Profile
             </button>
@@ -157,22 +178,34 @@ const PatientProfile = () => {
         )}
       </div>
 
-      <div className="appointments-section">
-        <h3>Appointment History</h3>
-        {appointments.length > 0 ? (
-          <ul>
-            {appointments.map((appointment) => (
-              <li key={appointment._id}>
-                <p><strong>Date:</strong> {new Date(appointment.date).toLocaleDateString()}</p>
-                <p><strong>Doctor:</strong> {appointment.doctorName}</p>
-                <p><strong>Reason:</strong> {appointment.reason}</p>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>No appointments found.</p>
-        )}
-      </div>
+      <div className="appointments-section bg-gray-50 p-6 rounded-lg shadow-lg">
+  <h3 className="text-2xl font-semibold text-gray-800 mb-4">Appointment History</h3>
+  {appointments.length > 0 ? (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6">
+      {appointments.map((appointment) => (
+        <div
+          key={appointment._id}
+          className="bg-white p-4 rounded-lg shadow-md border border-gray-200"
+        >
+          <p className="text-gray-700">
+            <span className="font-medium">Date:</span>{" "}
+            {new Date(appointment.date).toLocaleDateString()} || {appointment.time}
+          </p>
+          <p className="text-gray-700">
+            <span className="font-medium">Doctor:</span> {appointment.doctor.name}
+          </p>
+          <p className="text-gray-700">
+            <span className="font-medium">Specialization:</span>{" "}
+            {appointment.doctor.specialization}
+          </p>
+        </div>
+      ))}
+    </div>
+  ) : (
+    <p className="text-gray-600">No appointments found.</p>
+  )}
+</div>
+
     </div>
   );
 };

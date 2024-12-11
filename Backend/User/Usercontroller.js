@@ -165,7 +165,7 @@ const bookapp = async (req, res) => {
       time,
       status: status || "pending",
     });
-    console.log(appointment)
+    // console.log(appointment)
 
     await appointment.save();
     res.status(201).json({ message: "Appointment booked successfully!" });
@@ -183,10 +183,10 @@ const getAppointments = async (req, res) => {
   if (status) query.status = status;
 
   const findDoc = await appSchema.find(query).populate('patient', 'name email phone')
-  console.log(findDoc)
+  // console.log(findDoc)
   if (findDoc) {
     res.status(201).json(findDoc)
-    console.log(findDoc)
+    // console.log(findDoc)
   } else {
     res.status(404).json({ msg: "Finding doctor failed" })
   }
@@ -202,10 +202,10 @@ const userAppointmentView = async (req, res) => {
   console.log("query:", query)
 
   const findUser = await appSchema.find(query).populate('doctor', 'name specialization')
-  console.log("Finding User :" ,findUser)
+  // console.log("Finding User :" ,findUser)
   if (findUser) {
     res.status(201).json(findUser)
-    console.log("Finding User :" ,findUser)
+    // console.log("Finding User :" ,findUser)
   } else {
     res.status(404).json({ msg: "Finding User failed" })
   }
@@ -224,7 +224,7 @@ const updateAppointmentStatus = async (req, res) => {
       { status },
       { new: true } // Return the updated document
     );
-    console.log(updatedAppointment)
+    // console.log(updatedAppointment)
     if (updatedAppointment) {
       res.status(200).json(updatedAppointment);
     } else {
@@ -241,7 +241,7 @@ const updateAppointmentStatus = async (req, res) => {
 
 const appointmentView = async (req, res) => {
   const viewAppointment = await appSchema.find().populate('patient', 'name email').populate('doctor', 'name specialization')
-  console.log(viewAppointment)
+  // console.log(viewAppointment)
   if (viewAppointment) {
     res.status(201).json(viewAppointment)
   }
@@ -289,6 +289,69 @@ const appointmentCount = (async (req, res) => {
     res.json(appointment)
   }
 })
+const pendingAppointment = async (req, res) => {
+  try {
+    const { doctorId } = req.params;
+    const { status = "pending" } = req.query;
+
+    if (!mongoose.Types.ObjectId.isValid(doctorId)) {
+      return res.status(400).json({ message: "Invalid doctor ID format." });
+    }
+
+    // Check if the doctor exists and count appointments in one step
+    const doctorExists = await DoctorSchema.exists({ _id: doctorId });
+    if (!doctorExists) {
+      return res.status(404).json({ message: "Doctor not found." });
+    }
+
+    // Count the number of appointments
+    const appointmentCount = await appSchema.countDocuments({ doctor: doctorId, status });
+
+    // Respond with the count
+    return res.status(200).json({ count: appointmentCount });
+  } catch (error) {
+    console.error("Error fetching pending appointments: ", error);
+    res.status(500).json({ message: "Internal server error." });
+  }
+};
+
+const approvedappointment = async (req, res) => {
+  try {
+    const { doctorId } = req.params;
+    const { status = "approved" } = req.query;
+
+    if (!mongoose.Types.ObjectId.isValid(doctorId)) {
+      return res.status(400).json({ message: "Invalid doctor ID format." });
+    }
+
+    // Check if the doctor exists and count appointments in one step
+    const doctorExists = await DoctorSchema.exists({ _id: doctorId });
+    if (!doctorExists) {
+      return res.status(404).json({ message: "Doctor not found." });
+    }
+
+    // Count the number of appointments
+    const appointmentCount = await appSchema.countDocuments({ doctor: doctorId, status });
+
+    // Respond with the count
+    return res.status(200).json({ count: appointmentCount });
+  } catch (error) {
+    console.error("Error fetching pending appointments: ", error);
+    res.status(500).json({ message: "Internal server error." });
+  }
+};
+
+
+const deleteDoctor = async(req,res)=>{
+  const {id} =  req.params
+  const doc = await DoctorSchema.findByIdAndDelete(id)
+  if(doc){
+    res.status(200)
+  }
+
+}
+
+
 
 
 
@@ -346,7 +409,7 @@ module.exports = {
   docReg,
   doclogin,
   doclist,
-  updateDoctorProfile,
+  updateDoctorProfile,deleteDoctor,
   findDoc, bookapp, getAppointments, viewUser, deleteUser, docView, appointmentView, appointmentCount, doctorCount, patientCount,
-  updateAppointmentStatus, patientView , updateProfile ,userAppointmentView
+  updateAppointmentStatus, patientView, updateProfile, userAppointmentView, pendingAppointment,approvedappointment
 };

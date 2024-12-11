@@ -54,6 +54,16 @@ h1, h2, h3, h4, p {
 .profile-icon:hover {
   color: #d1e7fd;
 }
+.poweroff{
+  transition: color 0.5s ease;
+  color: crimson;
+
+}
+.poweroff:hover{
+color: crimson;
+}
+
+
 
 /* Welcome Section */
 .welcome-sectionn {

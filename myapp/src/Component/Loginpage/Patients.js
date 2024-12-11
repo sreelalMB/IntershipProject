@@ -36,25 +36,25 @@ const PatientProfile = () => {
     fetchPatientData();
   }, [id]);
 
-  useEffect(() => {
-    const fetchAppointments = async () => {
-      try {
-        const res = await axios.post(`http://localhost:4000/userAppointmentView/${id}?status=approved`);
-        if (res.status === 201) {
-          console.log(res.data)
-          setAppointments(res.data);
-          console.log("API Response:", res.data);
-        } else {
-          console.log("No appointments found.");
-          setAppointments([]);
-        }
-      } catch (error) {
-        console.error("Error fetching appointments:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchAppointments = async () => {
+  //     try {
+  //       const res = await axios.post(`http://localhost:4000/userAppointmentView/${id}?status=approved`);
+  //       if (res.status === 201) {
+  //         console.log(res.data)
+  //         setAppointments(res.data);
+  //         console.log("API Response:", res.data);
+  //       } else {
+  //         console.log("No appointments found.");
+  //         setAppointments([]);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching appointments:", error);
+  //     }
+  //   };
 
-    fetchAppointments();
-  }, [id]);
+  //   fetchAppointments();
+  // }, [id]);
 
   const handleChange = (e) => {
     setData({
@@ -178,7 +178,7 @@ const PatientProfile = () => {
         )}
       </div>
 
-      <div className="appointments-section bg-gray-50 p-6 rounded-lg shadow-lg">
+      {/* <div className="appointments-section bg-gray-50 p-6 rounded-lg shadow-lg">
   <h3 className="text-2xl font-semibold text-gray-800 mb-4">Appointment History</h3>
   {appointments.length > 0 ? (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6">
@@ -204,7 +204,7 @@ const PatientProfile = () => {
   ) : (
     <p className="text-gray-600">No appointments found.</p>
   )}
-</div>
+</div> */}
 
     </div>
   );

@@ -50,17 +50,17 @@ const AdminDashboard = () => {
                 <div className="header">
                     <h1>Welcome, Admin</h1>
                 </div>
-                <div className="cards">
+                <div className="cards ">
                     <div className="card">
                         <h3>Total Patients</h3>
                         <p>{patientcount}</p>
                     </div>
-                    <div className="card">
+                    <div className="card ">
                         <h3>Total Doctors</h3>
                         <p>{doctorcount}</p>
                     </div>
                     <div className="card">
-                        <h3>Pending Appointments</h3>
+                        <h3>Total Appointments</h3>
                         <p>{appointmentcount}</p>
                     </div>
                 </div>

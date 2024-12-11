@@ -38,10 +38,12 @@ const Navbar = () => {
           <li><Link to="/Navbar">Home</Link></li>
           <li><Link to="/AboutUs">About Us</Link></li>
           <li><Link to="/Bookappointment">Book Appointment</Link></li>
+          <li><Link to="/MyAppointment">My Appointment</Link></li>
           <Link to="/Patients" className="profile-icon">
             <i className="fas fa-user-circle"></i> {/* Profile icon */}
           </Link>
-          <li><Link to="/">Logout</Link></li>
+          <li><Link to="/"><i className="fas fa-power-off" size="lg" style={{color: "#f5390a",}} />
+          </Link></li>
         </ul>
       </nav>
 

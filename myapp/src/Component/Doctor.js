@@ -9,6 +9,10 @@ const Doctor = () => {
     const { name } = location.state || {};
     const [profile, setProfile] = useState(null);
     const [appointment, setAppointment] = useState([])
+    const [doctorcount, setDoctorCount] = useState();
+    const [patientcount, setPatientCount] = useState();
+    const [appointmentcount, setAppointmentCount] = useState();
+    const [pendingCount, setPendingCount] = useState(0);
 
     // const userId = localStorage.getItem("user_id");
     const doctorId = localStorage.getItem("doctor_id")
@@ -28,6 +32,42 @@ const Doctor = () => {
                 setAppointment(res.data)
             })
     }, [])
+    useEffect(() => {
+        axios.get("http://localhost:4000/doctorcount")
+            .then((res) => {
+                setDoctorCount(res.data)
+            })
+    })
+    useEffect(() => {
+        axios.get("http://localhost:4000/patientcount")
+            .then((res) => {
+                setPatientCount(res.data)
+            })
+    })
+    useEffect(() => {
+        axios.get(`http://localhost:4000/approvedappointment/${doctorId}?status=approved`)
+            .then((res) => {
+                setAppointmentCount(res.data.count)
+            })
+    })
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchPendingAppointments = async () => {
+            try {
+                const response = await axios.get(`http://localhost:4000/pendingappointment/${doctorId}?status=pending`);
+                setPendingCount(response.data.count);
+            } catch (error) {
+                console.error("Error fetching pending appointments:", error);
+                setError("Failed to fetch pending appointments.");
+            }
+        };
+    
+        fetchPendingAppointments();
+    }, [doctorId]);
+    
+  
+
 
     if (!profile) {
         return <div>Loading...</div>; // Added a loading state
@@ -59,15 +99,15 @@ const Doctor = () => {
                 <div className="doctor-cards">
                     <div className="doctor-card">
                         <h3>Total Patients</h3>
-                        <p>150</p>
+                        <p>{patientcount}</p>
                     </div>
                     <div className="doctor-card">
                         <h3>Total Appointments</h3>
-                        <p>30</p>
+                        <p>{appointmentcount}</p>
                     </div>
                     <div className="doctor-card">
                         <h3>Pending Appointments</h3>
-                        <p>5</p>
+                        <p>{pendingCount}</p>
                     </div>
                 </div>
             </div>

@@ -14,6 +14,17 @@ function AdminDoctorView() {
             })
     })
 
+    const deleteHandler=(id)=>{
+        axios.delete(`http://localhost:4000/deletedoctor/${id}`)
+        .then((res)=>{
+            if(res.status == 200){
+                alert("Doctor Deleted SuccessFully")
+            }
+
+        })
+
+    }
+
     return (
         <div>
             <div>
@@ -63,7 +74,7 @@ function AdminDoctorView() {
                                         </td>
                                         <td>{obj.phone}</td>
                                         <th>
-                                            <button className="btn btn-ghost btn-xs">delete</button>
+                                            <button className="btn btn-ghost btn-xs" onClick={()=>{deleteHandler(obj._id)}}>delete</button>
                                         </th>
                                     </tr>
                                 )

@@ -36,6 +36,9 @@ router.post('/patientview/:id' , controller.patientView)
 router.put('/profileupdate/:id' , controller.updateProfile)
 router.post('/userAppointmentView/:id' , controller.userAppointmentView)
 
+router.get('/pendingappointment/:doctorId' , controller.pendingAppointment)
+router.get('/approvedappointment/:doctorId' , controller.approvedappointment)
+router.delete('/deletedoctor/:id' , controller.deleteDoctor)
 
 
 module.exports = router;

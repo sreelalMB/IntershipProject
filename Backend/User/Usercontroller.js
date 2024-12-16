@@ -341,12 +341,24 @@ const approvedappointment = async (req, res) => {
   }
 };
 
-
-const deleteDoctor = async(req,res)=>{
-  const {id} =  req.params
-  const doc = await DoctorSchema.findByIdAndDelete(id)
-  if(doc){
+const deleteAppointment = async (req, res) => {
+  const {id} = req.params
+  const deleteApp = await appSchema.findByIdAndDelete(id)
+  if(deleteApp){
     res.status(200)
+  }else{
+    res.status(404).json({msg:"Appointment deletion failed"})
+  }
+
+}
+
+
+const deleteDoctor = async (req, res) => {
+  const { id } = req.params
+  const doc = await DoctorSchema.findByIdAndDelete(id)
+  if (doc) {
+    res.status(200)
+    await appSchema.findOneAndDelete({ doctor: id })
   }
 
 }
@@ -409,7 +421,7 @@ module.exports = {
   docReg,
   doclogin,
   doclist,
-  updateDoctorProfile,deleteDoctor,
+  updateDoctorProfile, deleteDoctor,
   findDoc, bookapp, getAppointments, viewUser, deleteUser, docView, appointmentView, appointmentCount, doctorCount, patientCount,
-  updateAppointmentStatus, patientView, updateProfile, userAppointmentView, pendingAppointment,approvedappointment
+  updateAppointmentStatus, patientView, updateProfile, userAppointmentView, pendingAppointment, approvedappointment, deleteAppointment
 };

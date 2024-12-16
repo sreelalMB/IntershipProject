@@ -44,6 +44,17 @@ function Appointments() {
 
     }
 
+    const deleteHandler = (id) => {
+        axios.delete(`http://localhost:4000/deleteappointment/${id}`)
+        .then((res)=>{
+            if(res.status === 200){
+                alert("Appointment Deleted Successfully")
+            }
+        })
+
+
+    }
+
 
     return (
         <div style={{ marginTop: "90px", display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
@@ -68,7 +79,7 @@ function Appointments() {
                                 <a href="#" className="btn btn-success" onClick={() => { approveHandler(appointment._id) }}>
                                     Approve
                                 </a>
-                                <a href="#" className="btn btn-danger ml-12">
+                                <a href="#" className="btn btn-danger ml-12" onClick={() => { deleteHandler(appointment._id) }}>
                                     Delete
                                 </a>
                             </div>

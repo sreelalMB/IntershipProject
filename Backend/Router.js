@@ -39,6 +39,6 @@ router.post('/userAppointmentView/:id' , controller.userAppointmentView)
 router.get('/pendingappointment/:doctorId' , controller.pendingAppointment)
 router.get('/approvedappointment/:doctorId' , controller.approvedappointment)
 router.delete('/deletedoctor/:id' , controller.deleteDoctor)
-
+router.delete('/deleteappointment/:id', controller.deleteAppointment)
 
 module.exports = router;

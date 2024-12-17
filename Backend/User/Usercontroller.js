@@ -259,8 +259,8 @@ const deleteUser = (async (req, res) => {
   const deleteUser = await UserSchema.findByIdAndDelete(id);
   if (deleteUser) {
     res.status(200)
+    await appSchema.findOneAndDelete({ patient: id })
   }
-
 })
 
 const docView = async (req, res) => {
@@ -342,12 +342,12 @@ const approvedappointment = async (req, res) => {
 };
 
 const deleteAppointment = async (req, res) => {
-  const {id} = req.params
+  const { id } = req.params
   const deleteApp = await appSchema.findByIdAndDelete(id)
-  if(deleteApp){
+  if (deleteApp) {
     res.status(200)
-  }else{
-    res.status(404).json({msg:"Appointment deletion failed"})
+  } else {
+    res.status(404).json({ msg: "Appointment deletion failed" })
   }
 
 }

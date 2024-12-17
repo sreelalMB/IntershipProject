@@ -54,6 +54,11 @@ function Appointments() {
 
 
     }
+    const formatDate = (isoDateString) => {
+        const date = new Date(isoDateString);
+        return `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()}`;
+    };
+
 
 
     return (
@@ -70,7 +75,7 @@ function Appointments() {
                                 <strong>Phone:</strong> {appointment.patient.phone}
                             </p>
                             <p className="card-text">
-                                <strong>Date:</strong> {appointment.date}
+                                <strong>Date:</strong>{formatDate(appointment.date)}
                             </p>
                             <p className="card-text">
                                 <strong>Time:</strong> {appointment.time}
@@ -80,7 +85,7 @@ function Appointments() {
                                     Approve
                                 </a>
                                 <a href="#" className="btn btn-danger ml-12" onClick={() => { deleteHandler(appointment._id) }}>
-                                    Delete
+                                    Reject
                                 </a>
                             </div>
                         </div>

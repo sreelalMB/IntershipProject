@@ -32,9 +32,9 @@ function AdminUserView() {
                         <thead>
                             <tr>
                                 <th>
-                                    <label>
+                                    {/* <label>
                                         <input type="checkbox" className="checkbox" />
-                                    </label>
+                                    </label> */}
                                 </th>
                                 <th>Name</th>
                                 <th>Email</th>
@@ -49,9 +49,9 @@ function AdminUserView() {
 
                                     <tr key={obj._id}>
                                         <th>
-                                            <label>
+                                            {/* <label>
                                                 <input type="checkbox" className="checkbox" />
-                                            </label>
+                                            </label> */}
                                         </th>
                                         <td>
                                             <div className="flex items-center gap-3">

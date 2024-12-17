@@ -1,30 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import img1 from "../../assests/img01.jpg";
 
 function Landingpage() {
+  // State to manage dropdown visibility
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  // Function to toggle dropdown visibility
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
   return (
     <div className="landing">
       <nav className="bg-blue-600 shadow-md">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <p className="text-3xl font-bold text-white" href="#">BookMyCare</p>
+          <p className="text-3xl font-bold text-white">BookMyCare</p>
           <button className="block md:hidden focus:outline-none">
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="hidden md:flex items-center space-x-4">
-            <p className="text-white hover:text-gray-900 cursor-pointer" href="#">Home</p>
-            <p className="text-white hover:text-gray-900 cursor-pointer" href="#">Contact Us</p>
-            <div className="relative group">
-              <button className="text-white hover:text-gray-900 flex items-center mt-2">
+            <p className="text-white hover:text-gray-900 cursor-pointer">Home</p>
+            <p className="text-white hover:text-gray-900 cursor-pointer">Contact Us</p>
+            <div className="relative">
+              <button 
+                onClick={toggleDropdown} 
+                className="text-white hover:text-gray-900 flex items-center mt-2"
+              >
                 Login
                 <svg className="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                   <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06-.02L10 10.878l3.71-3.69a.75.75 0 111.06 1.06l-4 3.998a.75.75 0 01-1.06 0l-4-4a.75.75 0 01-.02-1.06z" clipRule="evenodd" />
                 </svg>
               </button>
-              <ul className="absolute hidden group-hover:block bg-white border rounded shadow-lg mt-1">
-                <li><a className="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="/Admin">Admin</a></li>
-                <li><a className="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="/RegistrationForm">Patient</a></li>
-                <li><a className="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="/DoctorsForm">Doctor</a></li>
-              </ul>
+              {/* Dropdown menu */}
+              {isDropdownOpen && (
+                <ul className="absolute bg-white border rounded shadow-lg mt-1">
+                  <li><a className="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="/Admin">Admin</a></li>
+                  <li><a className="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="/Loginpage">Patient</a></li>
+                  <li><a className="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="/DoctorsLogin">Doctor</a></li>
+                </ul>
+              )}
             </div>
           </div>
         </div>
@@ -60,6 +74,7 @@ function Landingpage() {
           </div>
         </div>
       </section>
+
       <footer className="footer">
         <p>&copy; 2024 BookMyCare. All rights reserved.</p>
         <p>Terms of Service | Privacy Policy</p>

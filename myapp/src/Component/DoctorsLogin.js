@@ -1,4 +1,3 @@
-// src/components/DoctorsLogin.js
 import React, { useState } from 'react';
 import './DoctorsLogin.css'; // Updated to the new CSS file
 import { Link } from 'react-router-dom';
@@ -20,7 +19,7 @@ const DoctorsLogin = () => {
       const { msg, userId } = res.data;
       if (msg === "exist") {
         alert("Login Successful");
-        console.log(userId)
+        console.log(userId);
         localStorage.setItem('doctor_id', userId);
         navigate('/Doctor');
       } else {
@@ -57,7 +56,16 @@ const DoctorsLogin = () => {
           />
         </div>
         <button type="submit" className="doctors-login-btn">Login</button>
-        <Link to="/DoctorsForm"><button type="button" className="doctors-logout-btn">Back</button></Link>
+        
+        {/* Footer Section */}
+        <div className="doctors-footer-container mt-4">
+          <p>
+               Don't have an account ?  {" "}
+            <Link to="/DoctorsForm" className="doctors-login-link">
+                 Register here
+            </Link>
+          </p>
+        </div>
       </form>
     </div>
   );

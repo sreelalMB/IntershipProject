@@ -72,6 +72,10 @@ const Doctor = () => {
     if (!profile) {
         return <div>Loading...</div>; // Added a loading state
     }
+    const formatDate = (isoDateString) => {
+        const date = new Date(isoDateString);
+        return `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()}`;
+    };
 
     return (
         <div className="doctor-dashboard">
@@ -120,7 +124,7 @@ const Doctor = () => {
                             <p class=" text-base text-gray-500 sm:text-xl dark:text-gray-400">Patient :{obj.patient.name} </p>
                             <p class=" text-base text-gray-500 sm:text-lg dark:text-gray-400">Email :{obj.patient.email} </p>
                             <p class=" text-base text-gray-500 sm:text-lg dark:text-gray-400">Phone :{obj.patient.phone} </p>
-                            <p class="text-base text-gray-500 sm:text-lg dark:text-gray-400">Time & Date: {obj.time} , {obj.date}</p>
+                            <p class="text-base text-gray-500 sm:text-lg dark:text-gray-400">Time & Date: {obj.time} , {formatDate(obj.date)}</p>
                             <div class="items-center justify-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4 rtl:space-x-reverse">
                             </div>
                         </div>

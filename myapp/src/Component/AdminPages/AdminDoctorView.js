@@ -34,9 +34,9 @@ function AdminDoctorView() {
                         <thead>
                             <tr>
                                 <th>
-                                    <label>
+                                    {/* <label>
                                         <input type="checkbox" className="checkbox" />
-                                    </label>
+                                    </label> */}
                                 </th>
                                 <th>Name</th>
                                 <th>Email</th>
@@ -50,9 +50,9 @@ function AdminDoctorView() {
                                 doc.map((obj) =>
                                     <tr key={obj._id}>
                                         <th>
-                                            <label>
+                                            {/* <label>
                                                 <input type="checkbox" className="checkbox" />
-                                            </label>
+                                            </label> */}
                                         </th>
                                         <td>
                                             <div className="flex items-center gap-3">
@@ -74,7 +74,7 @@ function AdminDoctorView() {
                                         </td>
                                         <td>{obj.phone}</td>
                                         <th>
-                                            <button className="btn btn-ghost btn-xs" onClick={()=>{deleteHandler(obj._id)}}>delete</button>
+                                            <button className="bg-red-400 w-32 " onClick={()=>{deleteHandler(obj._id)}}>delete</button>
                                         </th>
                                     </tr>
                                 )

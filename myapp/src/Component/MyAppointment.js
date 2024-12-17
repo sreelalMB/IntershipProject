@@ -39,7 +39,10 @@ function MyAppointment() {
                             >
                                 <p className="text-gray-700">
                                     <span className="font-black">Date:</span>{" "}
-                                    {new Date(appointment.date).toLocaleDateString()} || {appointment.time}
+                                    {new Date(appointment.date).toLocaleDateString()} 
+                                </p>
+                                <p className="text-gray-700">
+                                    <span className="font-black">Time:</span> {appointment.time}
                                 </p>
                                 <p className="text-gray-700">
                                     <span className="font-black">Doctor:</span> {appointment.doctor.name}

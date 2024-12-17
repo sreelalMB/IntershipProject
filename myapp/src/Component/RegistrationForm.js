@@ -88,15 +88,12 @@ const RegistrationForm = () => {
         <button type="submit" className="signup-btn">
           Sign Up
         </button>
-        <Link to="/"><button type="submit" className="signout-btn">
+        <Link to="/Loginpage"><button type="submit" className="signout-btn">
           Back
         </button></Link>
 
         <div className="form-footer">
-          <p>
-            Already have an account?{" "}
-            <Link to="/Loginpage" className="login-link">Login here</Link>
-          </p>
+         
         </div>
       </form>
     </div>

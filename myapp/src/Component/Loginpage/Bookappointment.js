@@ -13,7 +13,6 @@ const BookAppointment = () => {
   const userId = localStorage.getItem("userid");
 
   useEffect(() => {
-    // console.log("userid is: " , userId)
     axios.get("http://localhost:4000/doclist")
       .then((res) => {
         setDoctors(res.data);
@@ -30,7 +29,7 @@ const BookAppointment = () => {
       return;
     }
 
-    console.log("Selected Doctor ID:", selectedDoctor); // Logs the selected doctor's ID
+    console.log("Selected Doctor ID:", selectedDoctor);
     setIsSubmitting(true);
 
     const appointmentData = {
@@ -38,13 +37,13 @@ const BookAppointment = () => {
       doctorId: selectedDoctor,
       date: appointmentDate,
       time: appointmentTime,
-      status:"pending"
+      status: "pending"
     };
 
     axios.post("http://localhost:4000/bookapp", appointmentData)
       .then((res) => {
-        console.log(res.data)
-        if (res.status == 201) {
+        console.log(res.data);
+        if (res.status === 201) {
           setMessage("Appointment booked successfully!");
           setSelectedDoctor('');
           setAppointmentDate('');
@@ -60,6 +59,15 @@ const BookAppointment = () => {
       });
   };
 
+  // Function to get today's date in YYYY-MM-DD format
+  const getTodayDate = () => {
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+    const yyyy = today.getFullYear();
+    return `${yyyy}-${mm}-${dd}`;
+  };
+
   return (
     <div className="bookapp">
       <div className="book-appointment">
@@ -69,7 +77,7 @@ const BookAppointment = () => {
             Select Doctor:
             <select
               value={selectedDoctor}
-              onChange={(e) => setSelectedDoctor(e.target.value)} // Update the selectedDoctor state
+              onChange={(e) => setSelectedDoctor(e.target.value)}
             >
               <option value="">--Select Doctor--</option>
               {doctors.map((doctor) => (
@@ -85,6 +93,7 @@ const BookAppointment = () => {
             <input
               type="date"
               value={appointmentDate}
+              min={getTodayDate()} // Set minimum date to today
               onChange={(e) => setAppointmentDate(e.target.value)}
             />
           </label>

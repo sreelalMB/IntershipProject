@@ -97,20 +97,14 @@ const DoctorsForm = () => {
           Register
         </button>
 
-        <Link to="/">
+        <Link to="/DoctorsLogin">
           <button type="button" className="doctors-logout-button">
-            Log Out
+            Back
           </button>
         </Link>
 
-        <div className="doctors-footer-container">
-          <p>
-            Already registered?{" "}
-            <Link to="/DoctorsLogin" className="doctors-login-link">
-              Login here
-            </Link>
-          </p>
-        </div>
+        
+        
       </form>
     </div>
   );

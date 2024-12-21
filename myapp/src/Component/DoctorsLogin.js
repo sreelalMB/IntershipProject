@@ -56,13 +56,13 @@ const DoctorsLogin = () => {
           />
         </div>
         <button type="submit" className="doctors-login-btn">Login</button>
-        
+
         {/* Footer Section */}
         <div className="doctors-footer-container mt-4">
           <p>
-               Don't have an account ?  {" "}
+            Don't have an account ?  {" "}
             <Link to="/DoctorsForm" className="doctors-login-link">
-                 Register here
+              Register here
             </Link>
           </p>
         </div>

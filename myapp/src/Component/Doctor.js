@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './Doctor.css';
 import { Link } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+import { useLocation , useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Doctor = () => {
+    const navigate= useNavigate();
     const location = useLocation();
     const { name } = location.state || {};
     const [profile, setProfile] = useState(null);
@@ -16,6 +17,13 @@ const Doctor = () => {
 
     // const userId = localStorage.getItem("user_id");
     const doctorId = localStorage.getItem("doctor_id")
+
+    useEffect(() => {
+        if (!doctorId) {
+            navigate('/doctorslogin')
+            alert("Login Please.......")
+        }
+    }, [])
 
     useEffect(() => {
         if (doctorId) {
@@ -62,11 +70,11 @@ const Doctor = () => {
                 setError("Failed to fetch pending appointments.");
             }
         };
-    
+
         fetchPendingAppointments();
     }, [doctorId]);
-    
-  
+
+
 
 
     if (!profile) {
@@ -76,6 +84,12 @@ const Doctor = () => {
         const date = new Date(isoDateString);
         return `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()}`;
     };
+
+    const logoutHandler = () => {
+        localStorage.removeItem("doctor_id");
+        navigate('/doctorslogin')
+
+    }
 
     return (
         <div className="doctor-dashboard">
@@ -91,8 +105,7 @@ const Doctor = () => {
                     <li><Link to="/home" className="sidebar-link">🏠 Home</Link></li>
                     <li><Link to="/DoctorProfile" className="sidebar-link">👤 Profile</Link></li>
                     <li><Link to="/appointment" className="sidebar-link">📅 Appointments</Link></li>
-                    <li>
-                        <Link to="/" className="logout-link">🚪 Log Out</Link>
+                    <li className="logout-link" onClick={logoutHandler}>🚪 Log Out
                     </li>
                 </ul>
             </div>

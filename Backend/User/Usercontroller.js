@@ -236,6 +236,32 @@ const updateAppointmentStatus = async (req, res) => {
   }
 };
 
+const rejectAppointment = async (req, res) => {
+  const { id } = req.params
+  const { status } = req.body
+
+  console.log(id)
+  console.log(status)
+
+  try {
+    const updatedAppointment = await appSchema.findByIdAndUpdate(
+      id,
+      { status },
+      { new: true } // Return the updated document
+    );
+    // console.log(updatedAppointment)
+    if (updatedAppointment) {
+      res.status(200).json(updatedAppointment);
+    } else {
+      res.status(404).json({ msg: "Appointment not found" });
+    }
+  } catch (error) {
+    console.error("Error updating appointment:", error);
+    res.status(500).json({ msg: "Internal server error" });
+  }
+
+}
+
 
 
 
@@ -423,5 +449,6 @@ module.exports = {
   doclist,
   updateDoctorProfile, deleteDoctor,
   findDoc, bookapp, getAppointments, viewUser, deleteUser, docView, appointmentView, appointmentCount, doctorCount, patientCount,
-  updateAppointmentStatus, patientView, updateProfile, userAppointmentView, pendingAppointment, approvedappointment, deleteAppointment
+  updateAppointmentStatus, patientView, updateProfile, userAppointmentView, pendingAppointment, approvedappointment, deleteAppointment,
+  rejectAppointment
 };

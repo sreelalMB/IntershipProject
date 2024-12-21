@@ -27,6 +27,21 @@ const AdminDashboard = () => {
             })
     })
 
+
+    useEffect(() => {
+        const userRole = localStorage.getItem("admin")
+        if(userRole !== "hospitaladmin"){
+            navigate('/admin')
+            alert("Login please......")
+        }
+
+    }, [])
+
+    const logoutHandler = ()=>{
+        localStorage.removeItem("admin")
+        navigate('/admin')
+    }
+
     const navigate = useNavigate()
     return (
         <div className="dashboard">
@@ -37,8 +52,8 @@ const AdminDashboard = () => {
                     <li onClick={() => { navigate('/AdminUserView') }} >Manage Patients</li>
                     <li onClick={() => { navigate('/AdminDoctorView') }}>Manage Doctors</li>
                     <li onClick={() => { navigate('/AdminappointmentView') }}>Appointments</li>
-                    <li>
-                        <Link to='/' className="logout-link">Log Out</Link>
+                    <li
+                        className="logout-link" onClick={logoutHandler}>Log Out
                     </li>
 
 

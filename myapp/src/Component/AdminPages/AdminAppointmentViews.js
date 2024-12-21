@@ -34,6 +34,7 @@ function AdminAppointmentViews() {
                             <th>Specialization</th>
                             <th>Time</th>
                             <th>Date</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -47,6 +48,7 @@ function AdminAppointmentViews() {
                                     <td>{obj.doctor.specialization}</td>
                                     <td>{obj.time}</td>
                                     <td>{formatDate(obj.date)}</td> {/* Format the date here */}
+                                    <td>{obj.status}</td>
                                 </tr>
                             ))
                         }

@@ -28,17 +28,18 @@ router.get('/viewuser', controller.viewUser)
 router.delete('/deleteuser/:id', controller.deleteUser)
 router.get('/docview', controller.docView)
 router.get('/appointmentview', controller.appointmentView)
-router.get('/doctorcount' , controller.doctorCount)
-router.get('/patientcount' , controller.patientCount)
-router.get('/appointmentcount' , controller.appointmentCount)
+router.get('/doctorcount', controller.doctorCount)
+router.get('/patientcount', controller.patientCount)
+router.get('/appointmentcount', controller.appointmentCount)
 router.put("/appointment/:id/status", controller.updateAppointmentStatus);
-router.post('/patientview/:id' , controller.patientView)
-router.put('/profileupdate/:id' , controller.updateProfile)
-router.post('/userAppointmentView/:id' , controller.userAppointmentView)
+router.post('/patientview/:id', controller.patientView)
+router.put('/profileupdate/:id', controller.updateProfile)
+router.post('/userAppointmentView/:id', controller.userAppointmentView)
 
-router.get('/pendingappointment/:doctorId' , controller.pendingAppointment)
-router.get('/approvedappointment/:doctorId' , controller.approvedappointment)
-router.delete('/deletedoctor/:id' , controller.deleteDoctor)
-router.delete('/deleteappointment/:id', controller.deleteAppointment)
+router.get('/pendingappointment/:doctorId', controller.pendingAppointment)
+router.get('/approvedappointment/:doctorId', controller.approvedappointment)
+router.delete('/deletedoctor/:id', controller.deleteDoctor)
+router.put('/deleteappointment/:id/status', controller.rejectAppointment)
+
 
 module.exports = router;

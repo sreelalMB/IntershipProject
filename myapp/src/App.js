@@ -43,11 +43,11 @@ function App() {
           <Route path='/appointment' element={<Appointments />} />
           <Route path='/DoctorProfile' element={<DoctorProfile />} />
           <Route path='/Aboutus' element={<AboutUs />} />
-          <Route path='/AdminDoctorView' element={<AdminDoctorView/>}/>
-          <Route path='/AdminUserView' element={<AdminUserView/>}/>
-          <Route path='/AdminappointmentView' element={<AdminAppointmentViews/>}/>
-          
-          <Route path='/MyAppointment' element={<MyAppointment/>}/>
+          <Route path='/AdminDoctorView' element={<AdminDoctorView />} />
+          <Route path='/AdminUserView' element={<AdminUserView />} />
+          <Route path='/AdminappointmentView' element={<AdminAppointmentViews />} />
+
+          <Route path='/MyAppointment' element={<MyAppointment />} />
 
         </Routes>
       </div>

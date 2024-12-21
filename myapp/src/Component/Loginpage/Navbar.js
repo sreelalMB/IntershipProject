@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 import "@fortawesome/fontawesome-free/css/all.min.css"; // Import Font Awesome CSS
 import img1 from '../../assests/img12.jpeg';
 import img2 from '../../assests/img13.jpg';
 import img3 from '../../assests/img14.avif';
-
+import { useNavigate } from "react-router-dom";
 const doctors = [
   {
     id: 1,
@@ -28,12 +28,27 @@ const doctors = [
 ];
 
 const Navbar = () => {
+  const navigate = useNavigate()
+  const userid = localStorage.getItem("userid")
+  useEffect(() => {
+    if (!userid) {
+      alert("Login First")
+      navigate('/loginpage')
+
+    }
+
+  }, [])
+
+  const logoutHandler =()=>{
+    localStorage.removeItem("userid")
+    navigate('/loginpage')
+  }
   return (
     <div>
       <nav className="navbar">
         <div className="navbar-logo">
-        <p className="text-3xl font-bold text-white" href="#">BookMyCare</p>
-          </div>
+          <p className="text-3xl font-bold text-white" href="#">BookMyCare</p>
+        </div>
         <ul className="navbar-links">
           <li><Link to="/Navbar">Home</Link></li>
           <li><Link to="/AboutUs">About Us</Link></li>
@@ -42,8 +57,8 @@ const Navbar = () => {
           <Link to="/Patients" className="profile-icon">
             <i className="fas fa-user-circle"></i> {/* Profile icon */}
           </Link>
-          <li><Link to="/"><i className="fas fa-power-off" size="lg" style={{color: "#f5390a",}} />
-          </Link></li>
+          <li> <i className="fas fa-power-off" size="lg" style={{ color: "#f5390a", }} onClick={logoutHandler}/>
+          </li>
         </ul>
       </nav>
 
@@ -74,8 +89,8 @@ const Navbar = () => {
       <section className="aboutt-section">
         <h2>About BookMyCare</h2>
         <p>
-          BookMyCare is your one-stop platform for managing your healthcare needs. 
-          Our mission is to connect patients with top-rated doctors for seamless and efficient care. 
+          BookMyCare is your one-stop platform for managing your healthcare needs.
+          Our mission is to connect patients with top-rated doctors for seamless and efficient care.
           Whether you're booking appointments, accessing medical records, or seeking advice, we’re here to help.
         </p>
       </section>
@@ -93,10 +108,10 @@ const Navbar = () => {
 
       <section className="testimonials-section">
         <h2>What Our Patients Say</h2>
-        
+
         <div className="testimonials">
           <div className="testimonial">
-            
+
             <p>"BookMyCare made it so easy to book an appointment with a specialist. Highly recommend!"</p>
             <p>- Sarah L.</p>
           </div>
@@ -105,14 +120,14 @@ const Navbar = () => {
             <p>- Mark P.</p>
           </div>
         </div>
-        
+
       </section>
 
       <footer className="footer">
         <p>&copy; 2024 BookMyCare. All rights reserved.</p>
         <p><Link to="/terms">Terms of Service</Link> | <Link to="/privacy">Privacy Policy</Link></p>
       </footer>
-    </div>
+    </div >
   );
 };
 
